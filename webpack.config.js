@@ -9,7 +9,7 @@ module.exports = {
     entry: [
 		`webpack-dev-server/client?http://${HOST}:${PORT}`,
         'webpack/hot/only-dev-server',
-		'./src/app.jsx',
+		'./src/app.js',
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -20,7 +20,7 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: "./public",
+        contentBase: "./dist",
         noInfo: true,
         hot: true,
         inline: true,

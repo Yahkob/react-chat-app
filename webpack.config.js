@@ -8,7 +8,7 @@ const PORT = process.env.PORT || "8888";
 module.exports = {
     entry: [
 		`webpack-dev-server/client?http://${HOST}:${PORT}`,
-        'webpack/hot/only-dev-server',
+        	'webpack/hot/only-dev-server',
 		'./src/app.js',
     ],
     output: {

@@ -1,0 +1,22 @@
+{
+  "name": "react-chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yahkob/react-chat-app.git"
+  },
+  "author": "Yahkob",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yahkob/react-chat-app/issues"
+  },
+  "homepage": "https://github.com/Yahkob/react-chat-app#readme",
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
+}

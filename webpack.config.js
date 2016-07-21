@@ -7,9 +7,9 @@ const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || "8888";
 module.exports = {
     entry: [
-		`webpack-dev-server/client?http://${HOST}:${PORT}`,
-        	'webpack/hot/only-dev-server',
-		'./src/app.js',
+        `webpack-dev-server/client?http://${HOST}:${PORT}`,
+        'webpack/hot/only-dev-server',
+	'./src/app.js',
     ],
     output: {
         path: path.join(__dirname, 'dist'),

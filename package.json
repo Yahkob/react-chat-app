@@ -4,7 +4,6 @@
   "description": "react/webpack chat app",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --profile --colors --hot"
   },
   "repository": {
@@ -18,19 +17,20 @@
   },
   "homepage": "https://github.com/Yahkob/react-chat-app#readme",
   "devDependencies": {
+    "react-hot-loader": "^1.3.0",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "copy-webpack-plugin": "^3.0.1",
     "file-loader": "^0.9.0",
-    "react-hot-loader": "^1.3.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "redux": "^3.5.2"
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "webpack": "^1.13.1"
   }
 }

@@ -1,7 +1,7 @@
-import * as types from '../constants/ActionTypes.js';
+import * as types from '../constants/ActionTypes'
 
-function addMsg(text) {
-  return {type: types.ADD_MSG, text};
+function addMessage(text) {
+  return {type: types.ADD_MESSAGE, text}
 }
 
-export {addMsg};
+export {addMessage}

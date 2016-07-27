@@ -1,1 +1,1 @@
-export const ADD_MSG = 'ADD_MSG';
+export const ADD_MESSAGE = 'ADD_MESSAGE'

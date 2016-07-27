@@ -1,14 +1,14 @@
-import {ADD_MSG} from '../constants/ActionTypes.js';
+import {ADD_MESSAGE} from '../constants/ActionTypes'
 
 const initialState = [
   {
-    msgs: [],
+    messages: [],
   }
-];
+]
 
 export default function todos(state = initialState, action) {
   switch (action.type) {
-      case: ADD_MSG {
+      case ADD_MESSAGE :
           let {text, author} = action;
           return [
               {
@@ -16,7 +16,6 @@ export default function todos(state = initialState, action) {
                   author
               },
               ...state
-          ];
-      }
+          ]
   }
 }

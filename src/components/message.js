@@ -1,19 +1,11 @@
-import {Component} from 'react'
-import {ADD_MESSAGE} from '../constants/ActionTypes'
+import React, { PropTypes } from 'react'
+import moment from 'moment'
+
+const Message = ({ post, author, createdOn }) => (
+    <div>
+        <span>{author}: {post} </span> - {moment(createdOn).fromNow()}
+    </div>
+)
 
 
-export default class Message extends Component {
-  render () {
-    return (
-      <div>
-        <span> {this.props.author} </span>
-        <span> {this.props.post} </span>
-      </div>
-    )
-  }
-}
-
-Message.propTypes = {
-  author: PropTypes.string.isRequired,
-  post: PropTypes.string.isRequired
-};
+export default Message

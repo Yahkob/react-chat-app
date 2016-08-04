@@ -1,23 +1,34 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {addMessage} from '../actions/index.js'
 
-const Footer = ()  => {
+let Footer = ({dispatch})  => {
+    let postInput, authorInput
     return (
         <div>
             <div>Msg:
                 <form onSubmit={e => {
+                    let post = postInput.value
+                    let author = authorInput.value
                     e.preventDefault()
-                    if (!input.value.trim()) {
+                    if (!postInput.value.trim()) {
                       return
                     }
-                    dispatch(addMsg(input.value))
-                    input.value = ''
+                    dispatch(addMessage({post, author}))
+                    postInput.value = ''
                 }}>
-                    <input type="text"/>
+                    <input type="text"  ref={node => {postInput = node}} onKeyUp={e => {
+
+                    }}/>
                 </form>
             </div>
-            <div>Name: <form><input type="text"/></form></div>
+            <div>Name:
+                <form>
+                    <input type="text" ref={node => {authorInput = node}}/>
+                </form>
+            </div>
         </div>
     )
 }
-
+Footer = connect()(Footer)
 export default Footer

@@ -1,19 +1,20 @@
 import {ADD_MESSAGE} from '../constants/ActionTypes'
-
+import _ from 'lodash'
 const initialState = [
-    {author: 'Guest', post: 'Hello World!', id: 2, createdOn: Date.now()},
-    {author: 'Guest', post: 'Hello World 2!', id: 1, createdOn: Date.now()}
+    {author: 'Guest', post: 'Hello World!', id: _.uniqueId, createdOn: Date.now()},
+    {author: 'Guest', post: 'Hello World 2!', id: _.uniqueId, createdOn: Date.now()}
 ]
 
 export default function messages (state = initialState, action) {
     switch (action.type) {
         case ADD_MESSAGE:
-            let {text, author, id} = action;
+            let {post, author, id} = action;
+            author = author || 'Guest'
             return [
                 {
-                    text,
+                    post,
                     author,
-                    id
+                    id: _.uniqueId()
                 },
                 ...state
 

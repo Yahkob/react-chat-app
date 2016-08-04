@@ -6,8 +6,8 @@ let Footer = ({dispatch})  => {
     let postInput, authorInput
     return (
         <div>
-            <div>Msg:
-                <form onSubmit={e => {
+            <div>
+                Msg:<form onSubmit={e => {
                     let post = postInput.value
                     let author = authorInput.value
                     e.preventDefault()
@@ -22,8 +22,8 @@ let Footer = ({dispatch})  => {
                     }}/>
                 </form>
             </div>
-            <div>Name:
-                <form>
+            <div>
+                Name:<form>
                     <input type="text" ref={node => {authorInput = node}}/>
                 </form>
             </div>

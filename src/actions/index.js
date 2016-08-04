@@ -1,9 +1,10 @@
 import * as types from '../constants/ActionTypes'
 
-function addMessage(text) {
+function addMessage({post, author}) {
     return {
         type: types.ADD_MESSAGE,
-        text
+        post,
+        author
     }
 }
 

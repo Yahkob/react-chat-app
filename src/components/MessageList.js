@@ -4,7 +4,7 @@ import Message from './Message'
 const MessageList = ({ messages })  => {
     return (
         <div>
-            {messages.map(message =>
+            {messages.posts.map(message =>
                 <Message
                 {...message}
                 key={message.id}

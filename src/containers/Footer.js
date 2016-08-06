@@ -18,7 +18,6 @@ let Footer = ({dispatch})  => {
                     postInput.value = ''
                 }}>
                     <input type="text"  ref={node => {postInput = node}} onKeyUp={e => {
-
                     }}/>
                 </form>
             </div>

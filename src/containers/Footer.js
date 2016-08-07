@@ -1,33 +1,61 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addMessage} from '../actions/index.js'
+import {addMessage, toggleReadOnlyAuthor, onAuthorChange} from '../actions/index.js'
+const mapStateToProps = (state) => {
+    return {
+        ui: state.ui
+    }
+}
 
-let Footer = ({dispatch})  => {
+function mapDispatchToProps(dispatch) {
+    return {
+        addMessage: ({post, author}) => {
+            console.log(post,author)
+            dispatch(addMessage({post, author}))
+        },
+        toggleReadOnlyAuthor: (isReadOnly) => {
+            dispatch(toggleReadOnlyAuthor(isReadOnly))
+        },
+        onAuthorChange: (author) => {
+            dispatch(onAuthorChange(author))
+        }
+    }
+}
+
+let Footer = ({ui, addMessage, toggleReadOnlyAuthor, onAuthorChange})  => {
     let postInput, authorInput
+    let editableAuthor = (
+        <input type="text" value={ui.author} ref={node => {authorInput = node}} onChange={e => {onAuthorChange(e.target.value)}} onBlur={e => {
+            toggleReadOnlyAuthor(true)
+        }}/>
+    )
+    let readOnlyAuthor = (
+        <div>{ui.author}</div>
+    )
     return (
         <div>
             <div>
                 Msg:<form onSubmit={e => {
                     let post = postInput.value
-                    let author = authorInput.value
+                    let author = ui.author
                     e.preventDefault()
                     if (!postInput.value.trim()) {
                       return
                     }
-                    dispatch(addMessage({post, author}))
+                    addMessage({post, author})
                     postInput.value = ''
                 }}>
-                    <input type="text"  ref={node => {postInput = node}} onKeyUp={e => {
-                    }}/>
+                    <input type="text"  ref={node => {postInput = node}}/>
                 </form>
             </div>
             <div>
-                Name:<form>
-                    <input type="text" ref={node => {authorInput = node}}/>
-                </form>
+                Name: {ui.authorIsReadOnly ? readOnlyAuthor : editableAuthor}
             </div>
         </div>
     )
 }
-Footer = connect()(Footer)
+Footer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Footer)
 export default Footer

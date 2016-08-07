@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch'
 import * as types from '../constants/ActionTypes'
 import * as constants from '../constants/constants'
-function addMessage({post, author}) {
+import * as ui from '../constants/ui'
+function addMessage ({post, author}) {
     return {
         type: types.ADD_MESSAGE,
         post,
@@ -9,7 +10,21 @@ function addMessage({post, author}) {
     }
 }
 
-function fetchPosts() {
+function onAuthorChange (author) {
+    return {
+        type: ui.AUTHOR_CHANGE,
+        author
+    }
+}
+
+function toggleReadOnlyAuthor (authorIsReadOnly) {
+    return {
+        type: ui.TOGGLE_READ_ONLY_AUTHOR,
+        authorIsReadOnly
+    }
+}
+
+function fetchPosts () {
   return dispatch => {
     dispatch(requestPosts())
     return fetch(constants.GET_MESSAGES)
@@ -19,17 +34,17 @@ function fetchPosts() {
 }
 
 
-function requestPosts() {
+function requestPosts () {
   return {
     type: types.REQUEST_POSTS
   }
 }
 
-function receivePosts(data) {
+function receivePosts (data) {
   return {
     type: types.RECEIVE_POSTS,
     fetchedPosts: data
   }
 }
 
-export {addMessage, fetchPosts}
+export {addMessage, fetchPosts, toggleReadOnlyAuthor, onAuthorChange}

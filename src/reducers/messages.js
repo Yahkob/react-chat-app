@@ -15,7 +15,6 @@ export default function messages (state = initialState, action) {
             author = author || 'Guest'
 
             return {
-                isFetching: false,
                 posts: [
                     ...state.posts,
                     {
@@ -23,12 +22,13 @@ export default function messages (state = initialState, action) {
                         author,
                         id: _.uniqueId()
                     }
-                ]
+                ],
+                isFetching: false
             }
         case types.REQUEST_POSTS:
             return {
-                isFetching: true,
                 posts: [...state.posts],
+                isFetching: true,
             }
         case types.RECEIVE_POSTS:
             return {

@@ -4,6 +4,8 @@
   "description": "react/webpack chat app",
   "main": "webpack.config.js",
   "scripts": {
+    "test": "mocha --compilers js:babel-core/register --require ./src/test/setup.js --recursive src/test/**/*.js",
+    "test:watch": "npm test -- --watch",
     "dev": "webpack-dev-server --progress --profile --colors --hot"
   },
   "repository": {

@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 import * as types from '../constants/ActionTypes'
 import * as constants from '../constants/constants'
 import * as ui from '../constants/ui'
+import _ from 'lodash'
 function addMessage ({post, author}) {
     let clientId = _.uniqueId
     postMessage({post, author})
@@ -14,7 +15,7 @@ function addMessage ({post, author}) {
     }
 }
 
-function onAuthorChange (author) {
+function changeAuthor (author) {
     return {
         type: ui.AUTHOR_CHANGE,
         author
@@ -71,4 +72,4 @@ function receiveMessages (data) {
   }
 }
 
-export {addMessage, fetchMessages, toggleReadOnlyAuthor, onAuthorChange}
+export {addMessage, fetchMessages, toggleReadOnlyAuthor, changeAuthor, markMessageAsPending, requestMessages}

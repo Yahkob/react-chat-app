@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addMessage, toggleReadOnlyAuthor, onAuthorChange} from '../actions/index.js'
+import {addMessage, toggleReadOnlyAuthor, changeAuthor} from '../actions/index.js'
 const mapStateToProps = (state) => {
     return {
         ui: state.ui
@@ -16,16 +16,16 @@ function mapDispatchToProps(dispatch) {
         toggleReadOnlyAuthor: (isReadOnly) => {
             dispatch(toggleReadOnlyAuthor(isReadOnly))
         },
-        onAuthorChange: (author) => {
-            dispatch(onAuthorChange(author))
+        changeAuthor: (author) => {
+            dispatch(changeAuthor(author))
         }
     }
 }
 
-let Footer = ({ui, addMessage, toggleReadOnlyAuthor, onAuthorChange})  => {
+let Footer = ({ui, addMessage, toggleReadOnlyAuthor, changeAuthor})  => {
     let postInput, authorInput
     let editableAuthor = (
-        <input type="text" value={ui.author} ref={node => {authorInput = node}} onChange={e => {onAuthorChange(e.target.value)}} onBlur={e => {
+        <input type="text" value={ui.author} ref={node => {authorInput = node}} onChange={e => {changeAuthor(e.target.value)}} onBlur={e => {
             toggleReadOnlyAuthor(true)
         }}/>
     )

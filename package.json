@@ -4,7 +4,7 @@
   "description": "react/webpack chat app",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require ./src/test/setup.js --recursive src/test/**/*.js",
+    "test": "mocha --compilers js:babel-register --require ./src/test/setup.js --recursive src/test/**/*.js",
     "test:watch": "npm test -- --watch",
     "dev": "webpack-dev-server --progress --profile --colors --hot"
   },
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Yahkob/react-chat-app#readme",
   "devDependencies": {
+    "babel-register": "^6.11.6",
     "eslint": "^3.1.1",
     "eslint-plugin-react": "^5.2.2",
     "expect": "^1.20.2",

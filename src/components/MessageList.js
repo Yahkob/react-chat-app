@@ -7,7 +7,7 @@ const MessageList = ({ messages })  => {
             {messages.posts.map(message =>
                 <Message
                 {...message}
-                key={message.id}
+                key={message._id || message.cid}
                 />
             )}
         </div>

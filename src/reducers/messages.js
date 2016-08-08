@@ -2,16 +2,16 @@ import * as types from '../constants/ActionTypes'
 import _ from 'lodash'
 const initialState = {
     posts: [
-        {author: 'Guest', post: 'Hello World!', id: _.uniqueId(), createdOn: Date.now()},
-        {author: 'Guest', post: 'Hello World 2!', id: _.uniqueId(), createdOn: Date.now()}
+        {author: 'Guest', post: 'Hello World!', _id: _.uniqueId(), createdOn: Date.now()},
+        {author: 'Guest', post: 'Hello World 2!', _id: _.uniqueId(), createdOn: Date.now()}
     ],
-    isFetching: false
+    isFetching: false,
 }
 
 export default function messages (state = initialState, action) {
     switch (action.type) {
         case types.ADD_MESSAGE:
-            let {post, author} = action;
+            let {post, author, cid} = action;
             author = author || 'Guest'
 
             return {
@@ -20,7 +20,7 @@ export default function messages (state = initialState, action) {
                     {
                         post,
                         author,
-                        id: _.uniqueId()
+                        cid: _.uniqueId()
                     }
                 ],
                 isFetching: false
@@ -32,10 +32,10 @@ export default function messages (state = initialState, action) {
             }
         case types.RECEIVE_POSTS:
             return {
-                posts: [
+                posts: _.uniqBy([
                     ...state.posts,
-                    ...action.fetchedPosts
-                ],
+                    ...action.fetchedMessages
+                ], '_id'),
                 isFetching: false,
             }
     default:

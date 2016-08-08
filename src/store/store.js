@@ -2,7 +2,7 @@ import {createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
-import {fetchPosts} from '../actions'
+import {fetchMessages} from '../actions'
 
 export default function configureStore(preloadedState) {
     const loggerMiddleware = createLogger()
@@ -21,7 +21,7 @@ export default function configureStore(preloadedState) {
         })
     }
 
-    setInterval(() => {store.dispatch(fetchPosts())}, 3500)
+    setInterval(() => {store.dispatch(fetchMessages())}, 3500)
 
     return store
 }

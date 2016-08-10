@@ -1,10 +1,7 @@
 import * as types from '../constants/ActionTypes'
 import _ from 'lodash'
 const initialState = {
-    posts: [
-        {author: 'Guest', post: 'Hello World!', _id: _.uniqueId(), createdOn: Date.now()},
-        {author: 'Guest', post: 'Hello World 2!', _id: _.uniqueId(), createdOn: Date.now()}
-    ],
+    posts: [],
     isFetching: false,
 }
 

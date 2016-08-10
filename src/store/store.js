@@ -20,7 +20,7 @@ export default function configureStore(preloadedState) {
             store.replaceReducer(nextReducer)
         })
     }
-
+    store.dispatch(fetchMessages())
     setInterval(() => {store.dispatch(fetchMessages())}, 3500)
 
     return store

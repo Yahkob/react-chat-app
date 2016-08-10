@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Message from './Message'
 
 const MessageList = ({ messages })  => {
@@ -12,6 +12,10 @@ const MessageList = ({ messages })  => {
             )}
         </div>
     )
+}
+
+MessageList.propTypes = {
+    messages: PropTypes.object.isRequired
 }
 
 export default MessageList

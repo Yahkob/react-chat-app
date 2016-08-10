@@ -7,5 +7,11 @@ const Message = ({ post, author, createdOn }) => (
     </div>
 )
 
+Message.propTypes = {
+  post: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  createdOn: PropTypes.number.isRequired
+}
+
 
 export default Message

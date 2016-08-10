@@ -9,16 +9,22 @@ export default function messages (state = initialState, action) {
     switch (action.type) {
         case ui.TOGGLE_READ_ONLY_AUTHOR:
             return {
-                authorIsReadOnly: action.authorIsReadOnly,
-                author: state.author
+                authorIsReadOnly: action.authorIsReadOnly || !initialState.authorIsReadOnly,
+                author: state.author,
+                postsPending: initialState.postsPending
             }
         case ui.AUTHOR_CHANGE:
             return {
                 authorIsReadOnly: state.authorIsReadOnly,
-                author: action.author
+                author: action.author,
+                postsPending: initialState.postsPending
             }
         case ui.POST_PENDING:
-            return Object.assign(action, {postsPending: [action.pendingPostId, ...state.postsPending]})
+            return {
+                authorIsReadOnly: state.authorIsReadOnly,
+                author: state.author,
+                postsPending: [action.pendingPostId, ...state.postsPending]
+            }
     default:
       return state
     }

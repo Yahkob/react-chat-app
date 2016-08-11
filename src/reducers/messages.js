@@ -6,33 +6,32 @@ const initialState = {
 }
 
 export default function messages (state = initialState, action) {
+    let posts = state.posts ? [...state.posts] : []
     switch (action.type) {
         case types.ADD_MESSAGE:
-            let {post, author, cid} = action;
+            let {post, author} = action;
+
             author = author || 'Guest'
 
+            let newMessage = {
+                post,
+                author
+            }
+            posts.push(newMessage)
+
             return {
-                posts: [
-                    ...state.posts,
-                    {
-                        post,
-                        author,
-                        cid: _.uniqueId()
-                    }
-                ],
+                posts,
                 isFetching: false
             }
         case types.REQUEST_POSTS:
             return {
-                posts: [...state.posts],
+                posts,
                 isFetching: true,
             }
         case types.RECEIVE_POSTS:
+            posts.push(...action.fetchedMessages)
             return {
-                posts: _.uniqBy([
-                    ...state.posts,
-                    ...action.fetchedMessages
-                ], '_id'),
+                posts: _.uniqBy(posts, '_id'),
                 isFetching: false,
             }
     default:

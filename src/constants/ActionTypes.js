@@ -1,3 +1,4 @@
 export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const MESSAGE_POSTED = 'MESSAGE_POSTED'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const REQUEST_POSTS = 'REQUEST_POSTS'

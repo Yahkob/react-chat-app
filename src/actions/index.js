@@ -3,10 +3,7 @@ import * as types from '../constants/ActionTypes'
 import * as constants from '../constants/constants'
 import * as ui from '../constants/ui'
 import _ from 'lodash'
-function addMessage ({post, author}) {
-    let clientId = _.uniqueId
-    postMessage({post, author})
-    markMessageAsPending(clientId)
+function addMessage ({post, author, clientId}) {
     return {
         type: types.ADD_MESSAGE,
         post,
@@ -30,22 +27,29 @@ function toggleReadOnlyAuthor (authorIsReadOnly) {
 }
 
 function postMessage ({post, author}) {
-    let xhr = new XMLHttpRequest();
+    return dispatch => {
+        let clientId = _.uniqueId()
+        dispatch(addMessage({post, author, clientId}))
+        return fetch(constants.POST_MESSAGE, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({post, author})
+        })
+        .then(response => response.json())
+        .then(({_id, createdOn}) => dispatch(messagePosted({_id, clientId, createdOn})))
 
-    xhr.open('POST', constants.POST_MESSAGE);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = () => {
-        if (xhr.status !== 200) {
-            console.error('Post request failed')
-        }
-    };
-    xhr.send(encodeURI(`post=${post}&author=${author}`));
+    }
 }
 
-function markMessageAsPending (clientId) {
+function messagePosted ({_id, clientId, createdOn}) {
     return {
-        type: ui.POST_PENDING,
-        clientId
+        type: types.MESSAGE_POSTED,
+        _id,
+        clientId,
+        createdOn
     }
 }
 
@@ -72,4 +76,4 @@ function receiveMessages (data) {
   }
 }
 
-export {addMessage, fetchMessages, toggleReadOnlyAuthor, changeAuthor, markMessageAsPending, requestMessages}
+export {addMessage, fetchMessages, toggleReadOnlyAuthor, changeAuthor, postMessage, requestMessages}

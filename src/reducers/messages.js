@@ -7,16 +7,17 @@ const initialState = {
 
 export default function messages (state = initialState, action) {
     let posts = state.posts ? [...state.posts] : []
+    let {clientId} = action
     switch (action.type) {
         case types.ADD_MESSAGE:
-            let {post, author} = action;
-
             author = author || 'Guest'
 
             let newMessage = {
-                post,
-                author
+                post: action.post,
+                author: action.author,
+                clientId: action.clientId
             }
+
             posts.push(newMessage)
 
             return {
@@ -33,6 +34,23 @@ export default function messages (state = initialState, action) {
             return {
                 posts: _.uniqBy(posts, '_id'),
                 isFetching: false,
+            }
+        case types.MESSAGE_POSTED:
+            let {_id, createdOn} = action
+            let pendingMessage = _.first(posts.splice(_.findIndex(posts, {clientId}), 1))
+            let {author, post} = pendingMessage
+            let postedMessage = Object.assign(pendingMessage, {
+                clientId: null,
+                _id,
+                createdOn,
+                post,
+                author
+            })
+            console.log(postedMessage)
+            posts.push(postedMessage)
+            return {
+                posts: _.uniqBy(posts, '_id'),
+                isFetching: false
             }
     default:
       return state

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addMessage, toggleReadOnlyAuthor, changeAuthor} from '../actions/index.js'
+import {postMessage, toggleReadOnlyAuthor, changeAuthor} from '../actions/index.js'
 const mapStateToProps = (state) => {
     return {
         ui: state.ui
@@ -9,9 +9,8 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addMessage: ({post, author}) => {
-            console.log(post,author)
-            dispatch(addMessage({post, author}))
+        postMessage: ({post, author}) => {
+            dispatch(postMessage({post, author}))
         },
         toggleReadOnlyAuthor: (isReadOnly) => {
             dispatch(toggleReadOnlyAuthor(isReadOnly))
@@ -22,7 +21,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-let Footer = ({ui, addMessage, toggleReadOnlyAuthor, changeAuthor})  => {
+let Footer = ({ui, postMessage, toggleReadOnlyAuthor, changeAuthor})  => {
     let postInput, authorInput
     let editableAuthor = (
         <input type="text" value={ui.author} ref={node => {authorInput = node}} onChange={e => {changeAuthor(e.target.value)}} onBlur={e => {
@@ -35,14 +34,15 @@ let Footer = ({ui, addMessage, toggleReadOnlyAuthor, changeAuthor})  => {
     return (
         <div>
             <div>
-                Msg:<form onSubmit={e => {
+                Msg:
+                <form onSubmit={e => {
                     let post = postInput.value
                     let author = ui.author
                     e.preventDefault()
                     if (!postInput.value.trim()) {
                       return
                     }
-                    addMessage({post, author})
+                    postMessage({post, author})
                     postInput.value = ''
                 }}>
                     <input type="text"  ref={node => {postInput = node}}/>

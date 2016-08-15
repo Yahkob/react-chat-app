@@ -46,8 +46,9 @@ export default function messages (state = initialState, action) {
                 post,
                 author
             })
-            console.log(postedMessage)
+
             posts.push(postedMessage)
+            
             return {
                 posts: _.uniqBy(posts, '_id'),
                 isFetching: false

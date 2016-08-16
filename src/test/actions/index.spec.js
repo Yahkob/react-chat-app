@@ -25,13 +25,17 @@ describe('actions', () => {
         }
         expect(actions.toggleReadOnlyAuthor(authorIsReadOnly)).toEqual(expectedAction)
     })
-    it('should create an action to mark message as pending ', () => {
+    it('should create an action to add a pending message', () => {
         const clientId = 0
+        const author = 'Jaqen H\'ghar'
+        const post = 'valar morghulis'
         const expectedAction = {
-            type: ui.POST_PENDING,
-            clientId
+            type: types.ADD_PENDING_MESSAGE,
+            clientId,
+            author,
+            post
         }
-        expect(actions.markMessageAsPending(clientId)).toEqual(expectedAction)
+        expect(actions.addPendingMessage({clientId, author, post})).toEqual(expectedAction)
     })
     it('should create an action to request messages', () => {
         const clientId = 0
@@ -61,6 +65,40 @@ describe('async actions', () => {
         const store = mockStore({messages: []})
 
         return store.dispatch(actions.fetchMessages())
+        .then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        })
+    })
+
+    it('creates POST_MESSAGE when message POST', () => {
+        const _id = 12309123
+        const clientId = '1'
+        const createdOn = '1471307633126'
+        const post = {
+            author: 'Arya',
+            post: 'valar dohaeris',
+            clientId
+        }
+        const pendingPost = Object.assign({type: types.ADD_PENDING_MESSAGE}, post)
+        nock('http://localhost:3000/api/chat/newMsg')
+        .post('')
+        .reply(200, {
+            _id,
+            createdOn
+        })
+
+        const expectedActions = [
+            pendingPost,
+            {
+                type: types.MESSAGE_POSTED,
+                clientId,
+                createdOn,
+                _id
+            }
+        ]
+        const store = mockStore({messages: []})
+
+        return store.dispatch(actions.postMessage(post))
         .then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })

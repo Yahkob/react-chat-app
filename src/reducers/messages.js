@@ -9,7 +9,7 @@ export default function messages (state = initialState, action) {
     let posts = state.posts ? [...state.posts] : []
     let {clientId} = action
     switch (action.type) {
-        case types.ADD_MESSAGE:
+        case types.ADD_PENDING_MESSAGE:
             author = author || 'Guest'
 
             let newMessage = {
@@ -48,7 +48,7 @@ export default function messages (state = initialState, action) {
             })
 
             posts.push(postedMessage)
-            
+
             return {
                 posts: _.uniqBy(posts, '_id'),
                 isFetching: false

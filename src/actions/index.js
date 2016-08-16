@@ -3,9 +3,9 @@ import * as types from '../constants/ActionTypes'
 import * as constants from '../constants/constants'
 import * as ui from '../constants/ui'
 import _ from 'lodash'
-function addMessage ({post, author, clientId}) {
+function addPendingMessage ({post, author, clientId}) {
     return {
-        type: types.ADD_MESSAGE,
+        type: types.ADD_PENDING_MESSAGE,
         post,
         author,
         clientId
@@ -29,7 +29,7 @@ function toggleReadOnlyAuthor (authorIsReadOnly) {
 function postMessage ({post, author}) {
     return dispatch => {
         let clientId = _.uniqueId()
-        dispatch(addMessage({post, author, clientId}))
+        dispatch(addPendingMessage({post, author, clientId}))
         return fetch(constants.POST_MESSAGE, {
             method: 'POST',
             headers: {
@@ -76,4 +76,4 @@ function receiveMessages (data) {
   }
 }
 
-export {addMessage, fetchMessages, toggleReadOnlyAuthor, changeAuthor, postMessage, requestMessages}
+export {addPendingMessage, fetchMessages, toggleReadOnlyAuthor, changeAuthor, postMessage, requestMessages}

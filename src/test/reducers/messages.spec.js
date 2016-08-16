@@ -11,24 +11,26 @@ describe('messages reducer', () => {
         })
     })
 
-    it('should handle ADD_MESSAGE', () => {
-        let post = 'test message'
-        let author = 'test user'
+    it('should handle ADD_PENDING_MESSAGE', () => {
+        const post = 'test message'
+        const clientId = '1'
+        const author = 'test user'
         const expectedState = {
             posts: [
                 {
                     post,
-                    author
+                    author,
+                    clientId
                 }
             ],
             isFetching: false,
         }
         expect(
           reducer([], {
-            type: types.ADD_MESSAGE,
+            type: types.ADD_PENDING_MESSAGE,
             post,
             author,
-            cid: '1'
+            clientId
           })
       ).toEqual(expectedState)
     })
@@ -43,11 +45,11 @@ describe('messages reducer', () => {
         })
     })
     it('should handle RECEIVE_POSTS', () => {
-        let post = 'fetched message'
-        let author = 'test user'
-        let _id = 6
-        let createdOn = Date.now()
-        let fetchedMessage = {
+        const post = 'fetched message'
+        const author = 'test user'
+        const _id = 6
+        const createdOn = Date.now()
+        const fetchedMessage = {
             post,
             author,
             _id,

@@ -7,11 +7,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
-
-
 const MessageListContainer = connect(
     mapStateToProps,
     mapDispatchToProps

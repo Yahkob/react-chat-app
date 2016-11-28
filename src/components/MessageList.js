@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import Message from './Message'
 
 const MessageList = ({ messages })  => {
-    return (
+    return  (
         <div>
             {messages.posts.map(message =>
                 <Message

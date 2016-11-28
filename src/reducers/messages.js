@@ -17,9 +17,7 @@ export default function messages (state = initialState, action) {
                 author: action.author,
                 clientId: action.clientId
             }
-
             posts.push(newMessage)
-
             return {
                 posts,
                 isFetching: false

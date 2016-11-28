@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
+import style from './style.css'
 
 const Message = ({ post, author, createdOn, clientId }) => (
-    <div>
-        <span>{author}: {post} </span> - {moment(createdOn).fromNow()} {clientId ? ' Posting...' : ''}
+    <div className={style.loader}>
+        <span>{author}: {post} </span> - {moment(createdOn).fromNow()} {clientId && <img src={require('../assets/loader.gif')}/>}
     </div>
 )
 

@@ -1,0 +1,8 @@
+.message img {
+    vertical-align: middle;
+}
+
+.messagesList {
+    height: 400px;
+    overflow: auto;
+}
